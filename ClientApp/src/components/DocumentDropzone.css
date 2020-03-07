@@ -1,0 +1,55 @@
+.files input,
+.files input:focus {
+  cursor: pointer;
+  background: #f1f1f1;
+  border: 3px dashed #607d8b;
+  border-radius: 2px;
+  color: #455a64;
+  font-size: 14px;
+  margin: 0;
+  padding: 120px 25px;
+  text-align: center;
+  width: 100% !important;
+  -webkit-transition: background 0.15s linear, border 0.15s linear,
+    color 0.15s linear, opacity 0.15s linear;
+  transition: background 0.15s linear, border 0.15s linear, color 0.15s linear,
+    opacity 0.15s linear;
+  box-shadow: none;
+}
+
+.files {
+  position: relative;
+}
+
+.files:after {
+  pointer-events: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 50px;
+  right: 0;
+  height: 56px;
+  content: "";
+  background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+  display: block;
+  margin: 0 auto;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.files:before {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  right: 0;
+  height: 57px;
+  content: " or drag it here. ";
+  display: block;
+  margin: 0 auto;
+  color: #2ea591;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+}
