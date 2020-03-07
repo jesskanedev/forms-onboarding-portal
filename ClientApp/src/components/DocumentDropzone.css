@@ -45,11 +45,14 @@
   width: 100%;
   right: 0;
   height: 57px;
-  content: " or drag it here. ";
+  content: "Upload or drag files here";
   display: block;
   margin: 0 auto;
   color: #2ea591;
   font-weight: 600;
-  text-transform: capitalize;
   text-align: center;
+}
+
+.result-padding {
+  margin-top: 30px;
 }

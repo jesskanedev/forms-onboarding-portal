@@ -9,7 +9,11 @@ export class DocumentDropzone extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { runId: uuidv4(), selectedFiles: [], documentProcessingResults: [] };
+    this.state = {
+      runId: uuidv4(),
+      selectedFiles: [],
+      documentProcessingResults: []
+    };
   }
 
   trackDocumentAdd = event => {
@@ -35,12 +39,14 @@ export class DocumentDropzone extends Component {
             <form method="post" action="#" id="#">
               <div className="form-group files">
                 <label>Upload your files </label>
-                <input
-                  type="file"
-                  className="form-control"
-                  multiple
-                  onChange={this.trackDocumentAdd}
-                />
+                <div className="document-dropzone-wrapper">
+                  <input
+                    type="file"
+                    className="form-control"
+                    multiple
+                    onChange={this.trackDocumentAdd}
+                  />
+                </div>
               </div>
             </form>
           </div>
@@ -56,15 +62,33 @@ export class DocumentDropzone extends Component {
             </button>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-12">
-            <ul>
-              {this.state.documentProcessingResults.map(result => (
-                <li key={result.id}>{result.id} </li>
-              ))}
-            </ul>
+
+        {this.state.documentProcessingResults.map(result => (
+          <div className="row result-padding" key={result.id}>
+            <div className="col-md-12">
+              <h2>Form ID: {result.id}</h2>
+              <table
+                className="table table-striped"
+                aria-labelledby="tabelLabel"
+              >
+                <thead>
+                  <tr>
+                    <th>Label</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.predictions.map(prediction => (
+                    <tr key={prediction.Key}>
+                      <td>{prediction.Key}</td>
+                      <td>{prediction.Value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     );
   }
@@ -73,7 +97,8 @@ export class DocumentDropzone extends Component {
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     await axios.post("onboarding/processforms", data, config).then(results => {
-      this.setState({ documentProcessingResults: results });
+      this.setState({ documentProcessingResults: results.data });
+      console.log(this.state.documentProcessingResults);
     });
   }
 }
